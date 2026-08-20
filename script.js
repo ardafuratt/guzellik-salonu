@@ -41,7 +41,8 @@
   var bakeW = maxEdge;
   var bakeH = Math.round(maxEdge * 9 / 16);
   var maxFrames = isTouch ? 84 : (coarse ? 120 : 180);
-  var scrubMode = isTouch ? 'video' : 'canvas';
+  // Başlangıçta her zaman video scrub — bake başarılı olursa canvas'a geçilir
+  var scrubMode = 'video';
   var videoScrubReady = false;
   var lastScrubTime = -1;
   var needsGesture = /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -89,9 +90,9 @@
     canvas.style.height = h + 'px';
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = 'low';
-    var scale = Math.max(canvas.width / bakeW, canvas.height / bakeH);
-    dest.dw = bakeW * scale;
-    dest.dh = bakeH * scale;
+    var s2 = Math.max(canvas.width / bakeW, canvas.height / bakeH);
+    dest.dw = bakeW * s2;
+    dest.dh = bakeH * s2;
     dest.dx = (canvas.width - dest.dw) / 2;
     dest.dy = (canvas.height - dest.dh) / 2;
     lastDrawKey = '';
@@ -241,7 +242,8 @@
   }
 
   function enableCanvas() {
-    if (scrubMode === 'video') return;
+    if (scrubMode === 'video' && !baked) return; // canvas'a ancak bake tamamlanınca geç
+    scrubMode = 'canvas';
     canvas.classList.add('is-on');
     video.classList.add('is-hidden');
     lastDrawKey = '';
@@ -257,22 +259,18 @@
   }
 
   function scrubVideo(t) {
-    if (!videoReady || !videoScrubReady) return;
-    if (Math.abs(lastScrubTime - t) < 0.02) return;
+    if (!videoReady) return;
+    if (Math.abs(lastScrubTime - t) < 0.015) return;
     lastScrubTime = t;
     if (typeof video.fastSeek === 'function') {
-      try {
-        video.fastSeek(t);
-        return;
-      } catch (e) {}
+      try { video.fastSeek(t); return; } catch (e) {}
     }
-    try {
-      video.currentTime = t;
-    } catch (e) {}
+    try { video.currentTime = t; } catch (e) {}
   }
 
   function startBake() {
-    if (scrubMode === 'video' || reduced || baked || baking || !videoReady) return;
+    // Touch cihazlarda veya reduced motion'da bake yapma
+    if (reduced || baked || baking || !videoReady) return;
     baking = true;
 
     var baker = video.cloneNode(true);
@@ -289,27 +287,32 @@
     baker.style.height = bakeH + 'px';
     document.body.appendChild(baker);
 
+    function onBakeSuccess() {
+      baking = false;
+      scrubMode = 'canvas';
+      enableCanvas();
+      baker.remove();
+    }
+
+    function onBakeFail() {
+      frames.length = 0;
+      lastBakedTime = 0;
+      bakeBySeek(baker).then(function () {
+        onBakeSuccess();
+      }).catch(function () {
+        baking = false;
+        baker.remove();
+        // Bake başarısız — video scrub zaten aktif, devam et
+        enableVideoScrub();
+      });
+    }
+
     function run() {
       var job = baker.requestVideoFrameCallback
         ? bakeFromPlayback(baker)
         : bakeBySeek(baker);
 
-      job.then(function () {
-        baking = false;
-        enableCanvas();
-        baker.remove();
-      }).catch(function () {
-        frames.length = 0;
-        lastBakedTime = 0;
-        bakeBySeek(baker).then(function () {
-          enableCanvas();
-          baker.remove();
-        }).catch(function () {
-          baking = false;
-          baker.remove();
-          enableVideoScrub();
-        });
-      });
+      job.then(onBakeSuccess).catch(onBakeFail);
     }
 
     if (baker.readyState >= 2) run();
@@ -319,18 +322,23 @@
   function unlockFirstFrame() {
     if (unlocked) return;
     unlocked = true;
+    // Video scrub'u hemen etkinleştir
+    enableVideoScrub();
     var p = video.play();
     if (p && p.then) {
       p.then(function () {
         video.pause();
         try { video.currentTime = 0; } catch (e) {}
-        if (isTouch) enableVideoScrub();
+        // Masaüstünde canvas bake başlat (arka planda, video scrub çalışmaya devam eder)
+        if (!isTouch) {
+          startBake();
+        }
       }).catch(function () {
+        // Play bloke edildi — video scrub devam eder (poster görünür)
         try { video.currentTime = 0.001; } catch (e) {}
       });
     } else {
       try { video.currentTime = 0.001; } catch (e) {}
-      if (isTouch) enableVideoScrub();
     }
   }
 
@@ -346,13 +354,11 @@
     }
     applyStageHeight();
     measure();
-    if (isTouch) {
-      if (!needsGesture) {
-        unlockFirstFrame();
-      }
+    // Touch cihazlarda gesture bekliyorsa hemen kilidi açma
+    if (isTouch && needsGesture) {
+      // touchstart'ta açılacak
     } else {
       unlockFirstFrame();
-      startBake();
     }
   }
 
@@ -414,11 +420,12 @@
     smoothTime += (targetTime - smoothTime) * follow;
     if (Math.abs(targetTime - smoothTime) < 0.004) smoothTime = targetTime;
 
-    if (scrubMode === 'video') {
-      scrubVideo(smoothTime);
-    } else if (frames.length) {
+    if (scrubMode === 'canvas' && frames.length) {
       var t = smoothTime > lastBakedTime ? lastBakedTime : smoothTime;
       drawAtTime(t);
+    } else {
+      // Video scrub modu (hem bake öncesi hem bake başarısız olursa)
+      scrubVideo(smoothTime);
     }
 
     var floodAmt = easeInQuad(remap(sceneP, 0.80, 0.97));
@@ -466,16 +473,19 @@
   }
 
   measure();
+  // Sayfa açıldığında hemen loop başlat (scrolla gerek yok)
+  setLoop(true);
   window.addEventListener('scroll', syncLoop, { passive: true });
   window.addEventListener('resize', function () {
     measure();
     syncLoop();
   });
   document.addEventListener('visibilitychange', syncLoop);
-  if (isTouch) {
+
+  // Touch cihazlar için gesture unlock
+  if (isTouch || needsGesture) {
     function onTouchUnlock() {
-      unlockFirstFrame();
-      enableVideoScrub();
+      if (!unlocked) unlockFirstFrame();
       measure();
       syncLoop();
       frameFixed();
@@ -484,7 +494,13 @@
       onTouchUnlock();
       document.removeEventListener('touchstart', touchHandler);
     }, { passive: true });
+    // Mouse tıklamasında da unlock (touchstart çalışmayan bazı cihazlar için)
+    document.addEventListener('click', function clickHandler() {
+      onTouchUnlock();
+      document.removeEventListener('click', clickHandler);
+    }, { once: true, passive: true });
   }
+
   video.addEventListener('loadedmetadata', function () {
     measure();
     syncLoop();

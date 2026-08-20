@@ -120,7 +120,7 @@
     summary.textContent = serviceLabel + ' · ' + dateFormatted + ' · ' + time +
       '. WhatsApp sohbeti açıldı — mesajı göndererek randevunuzu iletin.';
 
-    var waUrl = 'https://wa.me/905337799631?text=' + encodeURIComponent(msg);
+    var waUrl = 'https://wa.me/905413127485?text=' + encodeURIComponent(msg);
 
     var wa = document.querySelector('.wa-btn');
     if (wa) wa.href = waUrl;

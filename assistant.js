@@ -17,11 +17,11 @@
     },
     {
       q: 'Adresiniz nerede?',
-      a: 'Şehit Mustafa Gündoğdu Mah. Bayındır Cad. Filiz Sk. No:147/A, Uydukent, 12000 Merkez / Bingöl. Tel: 0533 779 96 31.'
+      a: 'Horozluhan Mah. Nalçacı Cad. No:58/A, Selçuklu, 42250 Merkez / Konya. Tel: 0541 312 74 85.'
     },
     {
       q: 'Lazer epilasyon acıtır mı?',
-      a: 'Soğutmalı cihazımızla çoğu misafir kısa bir ısı hissi tarif eder. Fatma Hanım hassas bölgelerde enerjiyi düşürür; ilk seans endişeyi genelde azaltır.'
+      a: 'Soğutmalı cihazımızla çoğu misafir kısa bir ısı hissi tarif eder. Selin Hanım hassas bölgelerde enerjiyi düşürür; ilk seans endişeyi genelde azaltır.'
     },
     {
       q: 'Kaç seans gerekir?',
@@ -33,11 +33,11 @@
     },
     {
       q: 'Randevu nasıl alınır?',
-      a: 'Sitedeki randevu formunu doldurun veya 0533 779 96 31 numaradan arayın / WhatsApp yazın. Saatiniz onaylandığında size dönüş yapılır.'
+      a: 'Sitedeki randevu formunu doldurun veya 0541 312 74 85 numaradan arayın / WhatsApp yazın. Saatiniz onaylandığında size dönüş yapılır.'
     },
     {
       q: 'Fiyatlar ne kadar?',
-      a: 'Fiyatlar hizmet ve bölgeye göre değişir. Güncel fiyat için 0533 779 96 31 numaradan bizi arayabilir veya WhatsApp yazabilirsiniz.'
+      a: 'Fiyatlar hizmet ve bölgeye göre değişir. Güncel fiyat için 0541 312 74 85 numaradan bizi arayabilir veya WhatsApp yazabilirsiniz.'
     }
   ];
 

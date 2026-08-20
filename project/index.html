@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Maira Güzellik Merkezi — Bingöl</title>
+<meta name="description" content="Maira Güzellik Merkezi — Lazer epilasyon, cilt bakımı, manikür pedikür ve incelme. Bingöl Uydukent.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <a class="nav-brand" href="#stage">Maira <span>Güzellik</span></a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Menü" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#hizmetler">Hizmetler</a>
+      <a href="#referans">Yorumlar</a>
+      <a href="#iletisim">İletişim</a>
+      <a href="#randevu">Randevu</a>
+    </div>
+    <a class="nav-cta" href="#randevu">Randevu</a>
+  </nav>
+  <div class="rail"><div class="rail-fill" id="railFill"></div></div>
+
+  <section class="scrollstage" id="stage">
+    <div class="pin">
+      <video
+        id="scrubVideo"
+        src="assets/zoom.mp4"
+        poster="assets/frame-device.jpg"
+        muted
+        autoplay
+        playsinline
+        webkit-playsinline
+        disablePictureInPicture
+        preload="auto"
+      ></video>
+      <canvas id="scrubCanvas"></canvas>
+
+      <div class="vignette"></div>
+      <div class="grain"></div>
+      <div class="flood" id="flood"></div>
+
+      <div class="intro-overlay" id="introOverlay">
+        <div class="eyebrow">Bingöl · Uydukent</div>
+        <h1>Güzellik.<br>Özenle.<br><em>Maira.</em></h1>
+        <p>Lazer epilasyon, cilt bakımı, manikür & pedikür, incelme. Randevulu, hijyenik, güler yüzlü hizmet.</p>
+        <div class="scrolldown"><div class="line"></div>Kaydır</div>
+      </div>
+
+      <div class="cap" id="cap1">
+        <span class="num">01 / Lazer</span>
+        <h3>Profesyonel epilasyon</h3>
+        <p>Kemer üstü, tüm vücut ve bölgesel lazer. Fatma Hanım ve ekibimizle güvenli uygulama.</p>
+      </div>
+
+      <div class="cap" id="cap2">
+        <span class="num">02 / Bakım</span>
+        <h3>Cilt & el-ayak</h3>
+        <p>Peeling, manikür, pedikür. Hijyen ve ince işçilik önceliğimiz.</p>
+      </div>
+
+      <div class="reveal" id="reveal">
+        <div class="word">Maira</div>
+        <div class="tag">Güzelliğinize değer veriyoruz</div>
+        <a href="#randevu" class="cta">Randevu al</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="after" id="klinik">
+
+    <div class="head">
+      <h2>Dört hizmet.<br>Tek adres.</h2>
+      <p>Maira Güzellik Merkezi — Bingöl Uydukent'te lazerden cilt bakımına, el-ayak bakımından incelmeye.</p>
+    </div>
+
+    <div class="services" id="hizmetler">
+      <article class="service-card">
+        <figure><img src="assets/lazer.jpg" alt="Lazer epilasyon uygulaması"></figure>
+        <div class="service-body">
+          <span class="service-tag">01</span>
+          <h3 class="serif">Lazer Epilasyon</h3>
+          <p>Kemer üstü, kol, bacak, bikini ve tüm vücut. Soğutmalı cihaz, kişiye özel seans planı.</p>
+          <a href="#randevu" data-service="lazer">Randevu al</a>
+        </div>
+      </article>
+      <article class="service-card">
+        <figure><img src="assets/cilt.jpg" alt="Cilt bakımı ve peeling"></figure>
+        <div class="service-body">
+          <span class="service-tag">02</span>
+          <h3 class="serif">Cilt &amp; Peeling</h3>
+          <p>Cilt yenileme, peeling ve bakım protokolleri. Ölü tabakayı alır, cildi canlandırır.</p>
+          <a href="#randevu" data-service="cilt">Randevu al</a>
+        </div>
+      </article>
+      <article class="service-card">
+        <figure><img src="assets/manikur.jpg" alt="Manikür ve pedikür"></figure>
+        <div class="service-body">
+          <span class="service-tag">03</span>
+          <h3 class="serif">Manikür &amp; Pedikür</h3>
+          <p>Hassas el ve ayak bakımı. İnce işçilik, steril ortam, güler yüzlü ekip.</p>
+          <a href="#randevu" data-service="manikur">Randevu al</a>
+        </div>
+      </article>
+      <article class="service-card">
+        <figure><img src="assets/incelme.jpg" alt="EMS ve LipoSlim incelme"></figure>
+        <div class="service-body">
+          <span class="service-tag">04</span>
+          <h3 class="serif">İncelme (EMS &amp; LipoSlim)</h3>
+          <p>EMS ve LipoSlim ile bölgesel incelme ve sıkılaştırma. Seanslık program.</p>
+          <a href="#randevu" data-service="incelme">Randevu al</a>
+        </div>
+      </article>
+    </div>
+
+    <ul class="stats">
+      <li><strong>5★</strong><span>Google</span></li>
+      <li><strong>09–20</strong><span>Pzt–Cmt</span></li>
+      <li><strong>4</strong><span>Hizmet</span></li>
+      <li><strong>1:1</strong><span>İlgi</span></li>
+    </ul>
+
+    <div class="story">
+      <p class="kicker">Hakkımızda</p>
+      <h3 class="serif">İşini hakkıyla yapan merkez.</h3>
+      <div class="story-copy">
+        <p>Maira Güzellik Merkezi, Bingöl'de lazer epilasyon, cilt bakımı, manikür-pedikür ve incelme hizmetleri sunar. Hijyen, güler yüz ve profesyonellik temel ilkelerimizdir.</p>
+        <p>Ekibimizden Fatma Hanım lazer uygulamalarında uzmanlaşmıştır; misafirlerimizin güvenini kazanmış, yıllardır tercih edilen isimlerden biridir.</p>
+      </div>
+    </div>
+
+    <div class="quotes" id="referans">
+      <p class="kicker">Google yorumları</p>
+      <h3 class="serif">Misafirlerimiz<br>ne diyor?</h3>
+      <ul class="quote-list">
+        <li>
+          <div class="stars" aria-label="5 yıldız">★★★★★</div>
+          <blockquote>“Pedikür işlemi için gittim, güler yüzlü ve hassas yaklaşımları ince işçilikten çok memnun kaldım. Tırnağım çok zor bir durumdaydı, çok güzel işlem yapıldı.”</blockquote>
+          <cite>Yeşim Kaya</cite>
+          <p class="owner-reply"><strong>Maira:</strong> Güzel yorumlarınız için teşekkür ederiz, sağlıcakla tekrar görüşmek dileğiyle.</p>
+        </li>
+        <li>
+          <div class="stars" aria-label="5 yıldız">★★★★★</div>
+          <blockquote>“Gerçekten işini hakkıyla yapan bir güzellik merkezi. Her konuda güvenim tam; iki senelik müşterileri olarak yazıyorum. Güler yüzleri ve işlemlerdeki hassasiyetleri çok iyi.”</blockquote>
+          <cite>Zeynep Dündar</cite>
+          <p class="owner-reply"><strong>Maira:</strong> Tercihiniz olmaktan onur duyduk.</p>
+        </li>
+        <li>
+          <div class="stars" aria-label="5 yıldız">★★★★★</div>
+          <blockquote>“Kemer üstü lazer için gittim. Güler yüzleri ve kaliteli hizmetleri için teşekkürler. Fatma Hanım'a ayrıca teşekkür — işinin ehli ve profesyonel.”</blockquote>
+          <cite>Toprak Kaya</cite>
+          <p class="owner-reply"><strong>Maira:</strong> Tercihiniz olduğumuz için teşekkür ederiz, sağlıcakla kalın.</p>
+        </li>
+        <li>
+          <div class="stars" aria-label="5 yıldız">★★★★★</div>
+          <blockquote>“Lazer epilasyona gittim. İşletmenin hijyeninden hem de Fatma Hanım'ın lazere karşı ön yargılarımı kırması beni çok mutlu etti.”</blockquote>
+          <cite>Yağmur Işık</cite>
+          <p class="owner-reply"><strong>Maira:</strong> İlginiz için teşekkür ederiz, tekrar görüşmek dileğiyle esen kalın.</p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="place" id="iletisim">
+      <div>
+        <p class="kicker">Adres</p>
+        <h3 class="serif">Uydukent.<br>Bingöl.</h3>
+        <p>Şehit Mustafa Gündoğdu Mah.<br>Bayındır Cad. Filiz Sk. No:147/A<br>Uydukent, 12000 Merkez / Bingöl</p>
+        <p class="place-meta">
+          <a href="tel:+905337799631">0533 779 96 31</a><br>
+          <a href="https://wa.me/905337799631" target="_blank" rel="noopener">WhatsApp ile yaz</a>
+        </p>
+      </div>
+      <div>
+        <p class="kicker">Çalışma saatleri</p>
+        <h3 class="serif">Hafta içi<br>+ Cumartesi.</h3>
+        <ul class="hours">
+          <li><span>Pazartesi</span><em>09:00 – 20:00</em></li>
+          <li><span>Salı</span><em>09:00 – 20:00</em></li>
+          <li><span>Çarşamba</span><em>09:00 – 20:00</em></li>
+          <li><span>Perşembe</span><em>09:00 – 20:00</em></li>
+          <li><span>Cuma</span><em>09:00 – 20:00</em></li>
+          <li><span>Cumartesi</span><em>09:00 – 20:00</em></li>
+          <li class="closed"><span>Pazar</span><em>Kapalı</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="booking" id="randevu">
+      <div class="booking-head">
+        <p class="kicker">Randevu</p>
+        <h3 class="serif">Sıranızı<br>ayırın.</h3>
+        <p>Tarih ve saati seçin, formu doldurun. Randevu oluştur dediğinizde WhatsApp sohbetimiz açılır; hazır mesajı göndermeniz yeterli.</p>
+      </div>
+      <form class="booking-form" id="bookingForm" novalidate>
+        <label>
+          <span>Ad Soyad</span>
+          <input type="text" name="name" required autocomplete="name" placeholder="Adınız Soyadınız">
+        </label>
+        <label>
+          <span>Telefon</span>
+          <input type="tel" name="phone" required autocomplete="tel" placeholder="05XX XXX XX XX">
+        </label>
+        <label>
+          <span>Hizmet</span>
+          <select name="service" id="serviceSelect" required>
+            <option value="">Seçin</option>
+            <option value="lazer">Lazer Epilasyon</option>
+            <option value="cilt">Cilt &amp; Peeling</option>
+            <option value="manikur">Manikür &amp; Pedikür</option>
+            <option value="incelme">İncelme (EMS &amp; LipoSlim)</option>
+          </select>
+        </label>
+        <label>
+          <span>Tarih</span>
+          <input type="date" name="date" id="bookingDate" required>
+        </label>
+        <label>
+          <span>Saat</span>
+          <select name="time" id="bookingTime" required>
+            <option value="">Önce tarih seçin</option>
+          </select>
+        </label>
+        <button type="submit" class="booking-submit">Randevu oluştur</button>
+        <p class="booking-note">Pazar günleri kapalıyız. Saatler 09:00–20:00 arasıdır.</p>
+      </form>
+      <div class="booking-done" id="bookingDone" hidden>
+        <h4 class="serif">WhatsApp açıldı.</h4>
+        <p id="bookingSummary"></p>
+        <p class="booking-wa-note">Hazır mesajı kontrol edip gönderin; randevunuz Maira Güzellik Merkezi'ne iletilir.</p>
+        <a href="https://wa.me/905337799631" target="_blank" rel="noopener" class="wa-btn">WhatsApp'ı tekrar aç</a>
+        <button type="button" id="bookingReset">Yeni randevu</button>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <p>© Maira Güzellik Merkezi — Bingöl</p>
+    <p><a href="tel:+905337799631">0533 779 96 31</a></p>
+  </footer>
+
+  <!-- AI Asistan -->
+  <div class="ai-widget">
+    <p class="ai-hint">Sorularınızı buraya sorabilirsiniz</p>
+    <button class="ai-fab" id="aiFab" type="button" aria-label="Asistanı aç">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
+  </div>
+  <div class="ai-panel" id="aiPanel" hidden>
+    <header class="ai-header">
+      <div>
+        <strong>Maira Asistan</strong>
+        <span>Aşağıdan bir soru seçin</span>
+      </div>
+      <button type="button" id="aiClose" aria-label="Kapat">×</button>
+    </header>
+    <div class="ai-messages" id="aiMessages"></div>
+    <div class="ai-questions" id="aiQuestions"></div>
+  </div>
+
+<script src="script.js"></script>
+<script src="appointment.js"></script>
+<script src="assistant.js"></script>
+</body>
+</html>
